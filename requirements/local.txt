@@ -1,0 +1,16 @@
+-r base.txt
+
+psycopg2==2.9.12
+flake8==7.3.0
+black==26.5.1
+isort==8.0.1
+argh==0.31.3
+PyYAML==6.0.3
+watchdog==6.0.0
+
+pytest-django==4.11.1
+pytest-factoryboy==2.8.1
+
+Faker==38.2.0
+
+pytest-cov==7.0.0
