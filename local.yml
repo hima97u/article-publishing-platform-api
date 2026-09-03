@@ -16,6 +16,7 @@ services:
     depends_on:
       - postgres
       - mailhog
+      - redis
     networks:
       - authors-api
 
@@ -39,20 +40,80 @@ services:
     networks:
       - authors-api
 
+
+  redis:
+    image: redis:7-alpine
+
+    networks:
+      - authors-api
+
+
+  celery_worker:
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+
+    command: /start-celeryworker
+
+    volumes:
+      - .:/app
+
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+
+    depends_on:
+      - redis
+      - postgres
+      - mailhog
+
+    networks:
+      - authors-api
+
+
+  flower:
+    build:
+      context: .
+      dockerfile: ./docker/local/django/Dockerfile
+
+    command: /start-flower
+
+    volumes:
+      - flower_data:/data
+
+    env_file:
+      - ./.envs/.local/.django
+      - ./.envs/.local/.postgres
+
+    ports:
+      - "5555:5555"
+
+    depends_on:
+      - redis
+      - postgres
+
+    networks:
+      - authors-api
+
+
   nginx:
     restart: always
+
     depends_on:
-            - api
+      - api
+
     volumes:
-            - static_volume:/app/staticfiles
-            - media_volume:/app/mediafiles
+      - static_volume:/app/staticfiles
+      - media_volume:/app/mediafiles
+
     build:
       context: ./docker/local/nginx
       dockerfile: Dockerfile
     ports:
-            - "8080:80"
+      - "8080:80"
+
     networks:
-            - authors-api
+      - authors-api
 
 networks:
   authors-api:
@@ -63,3 +124,4 @@ volumes:
   media_volume:
   local_postgres_data:
   local_postgres_data_backups:
+  flower_data:
