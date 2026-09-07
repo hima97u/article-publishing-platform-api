@@ -86,3 +86,5 @@ vine==5.1.0
 watchdog==6.0.0
 wcwidth==0.8.2
 Whoosh==2.7.4
+django-allauth==65.19.2
+dj-rest-auth==7.0.1
