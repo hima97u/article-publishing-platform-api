@@ -1,5 +1,19 @@
 -r base.txt
 
-psycopg[binary]==3.3.4
+psycopg2-binary==2.9.12
 
-watchfiles==1.1.1
+flake8==7.3.0
+
+black==26.5.1
+
+isort==8.0.1
+
+watchfiles==1.2.0
+
+pytest-django==4.11.1
+
+pytest-factoryboy==2.8.1
+
+Faker==38.2.0
+
+pytest-cov==7.0.0

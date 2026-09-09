@@ -8,6 +8,10 @@ env = environ.Env()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 ROOT_DIR = Path(__file__).resolve().parent.parent.parent
 
+# Load environment variables from .env files
+env_file = ROOT_DIR / ".envs" / ".local" / ".django"
+if env_file.exists():
+    environ.Env.read_env(str(env_file))
 
 APP_DIR = ROOT_DIR / "core_apps"
 
