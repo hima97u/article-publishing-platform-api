@@ -35,7 +35,6 @@ THIRD_PARTY_APPS = [
     "phonenumber_field",
     "drf_yasg",
     "corsheaders",
-    "djcelery_email",
     "rest_framework.authtoken",
     "allauth",
     "allauth.account",
@@ -173,11 +172,10 @@ CELERY_TASK_SERIALIZER = "json"
 CELERY_RESULT_SERIALIZER = "json"
 CELERY_RESULT_BACKEND_MAX_RETRIES = 10
 CELERY_TASK_SEND_SENT_EVENT = True
+CELERY_WORKER_SEND_TASK_EVENTS = True
 
 if USE_TZ:
     CELERY_TIMEZONE = TIME_ZONE
-    
-    
 
 REST_FRAMEWORK = {
     "DEFAULT_AUTHENTICATION_CLASSES": [

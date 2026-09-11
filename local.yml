@@ -14,9 +14,12 @@ services:
       - ./.envs/.local/.django
       - ./.envs/.local/.postgres
     depends_on:
-      - postgres
-      - mailhog
-      - redis
+      postgres:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
+      redis:
+        condition: service_healthy
     networks:
       - authors-api
 
@@ -29,6 +32,11 @@ services:
       - local_postgres_data_backups:/backups
     env_file:
       - ./.envs/.local/.postgres
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $$POSTGRES_USER -d $$POSTGRES_DB"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
     networks:
       - authors-api
 
@@ -43,7 +51,11 @@ services:
 
   redis:
     image: redis:7-alpine
-
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
     networks:
       - authors-api
 
@@ -63,9 +75,12 @@ services:
       - ./.envs/.local/.postgres
 
     depends_on:
-      - redis
-      - postgres
-      - mailhog
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
+      mailhog:
+        condition: service_started
 
     networks:
       - authors-api
@@ -89,8 +104,10 @@ services:
       - "5555:5555"
 
     depends_on:
-      - redis
-      - postgres
+      redis:
+        condition: service_healthy
+      postgres:
+        condition: service_healthy
 
     networks:
       - authors-api
