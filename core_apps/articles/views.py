@@ -13,7 +13,7 @@ from .filters import ArticleFilter
 from .models import Article, ArticleView
 from .pagination import ArticlePagination
 from .permissions import IsOwnerOrReadOnly
-from .renderers import ArticleJSONRenderer, ArticlesJSONRenderer
+from .renderers import ArticleJSONRenderer, ArticleJSONRenderer
 from .serializers import ArticleSerializer
 
 User = get_user_model()
@@ -32,7 +32,7 @@ class ArticleListCreateView(generics.ListCreateAPIView):
         "created_at",
         "updated_at",
     ]
-    renderer_classes = [ArticlesJSONRenderer]
+    renderer_classes = [ArticleJSONRenderer]
 
     def perform_create(self, serializer):
         serializer.save(author=self.request.user)
