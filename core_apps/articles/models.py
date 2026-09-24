@@ -11,6 +11,18 @@ from .read_time_engine import ArticleReadTimeEngine
 User = get_user_model()
 
 
+class Clap(TimeStampedModel):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    article = models.ForeignKey("Article", on_delete=models.CASCADE)
+
+    class Meta:
+        unique_together = ["user", "article"]
+        ordering = ["-created_at"]
+
+    def __str__(self):
+        return f"{self.user.first_name} clapped {self.article.title}"
+    
+
 class Article(TimeStampedModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="articles")
     title = models.CharField(verbose_name=_("Title"), max_length=255)
@@ -21,6 +33,9 @@ class Article(TimeStampedModel):
         verbose_name=_("banner image"), default="/profile_default.png"
     )
     tags = TaggableManager()
+    
+    # a user can clap multiple times for an article and also an article can have multiple claps from different users
+    claps = models.ManyToManyField(User, through=Clap, related_name="clapped_articles")
     
     def __str__(self):
         return f"{self.author.first_name}'s article"
