@@ -21,6 +21,7 @@ schema_view = get_schema_view(
 
 
 urlpatterns = [
+    # swagger urls
     path("redoc/", schema_view.with_ui("redoc", cache_timeout=0)),
     path(settings.ADMIN_URL, admin.site.urls),
     path("api/v1/auth/user", CustomUserDetailsView.as_view(), name="user_details"),
@@ -33,6 +34,8 @@ urlpatterns = [
     path("api/v1/articles/", include("core_apps.articles.urls")),
     # ratings app urls
     path("api/v1/ratings/", include("core_apps.ratings.urls")),
+    # bookmark urls
+    path("api/v1/bookmarks/", include("core_apps.bookmarks.urls")),
 ]
 
 admin.site.site_header = "Authors Article Publishing API"
