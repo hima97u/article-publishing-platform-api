@@ -36,6 +36,8 @@ urlpatterns = [
     path("api/v1/ratings/", include("core_apps.ratings.urls")),
     # bookmark urls
     path("api/v1/bookmarks/", include("core_apps.bookmarks.urls")),
+    # responses urls
+    path("api/v1/responses/", include("core_apps.responses.urls")),
 ]
 
 admin.site.site_header = "Authors Article Publishing API"
