@@ -1,4 +1,19 @@
 services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.10.2
+    container_name: elasticsearch
+    environment:
+      - discovery.type=single-node
+      - xpack.security.enabled=false
+    healthcheck:
+      test: ["CMD-SHELL", "curl -f http://localhost:9200/_cluster/health || exit 1"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "9200:9200"
+    networks:
+      - authors-api
   api:
     build:
       context: .
@@ -20,8 +35,11 @@ services:
         condition: service_started
       redis:
         condition: service_healthy
+      elasticsearch:
+        condition: service_healthy
     networks:
       - authors-api
+
 
   postgres:
     build:

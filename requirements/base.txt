@@ -38,8 +38,12 @@ djangorestframework-simplejwt==5.5.1
 # Use the newer compatible release available from your package index.
 dj-rest-auth
 
-django-elasticsearch-dsl==8.2
+elasticsearch>=7.10,<8.0
 
-django-elasticsearch-dsl-drf==0.22.5
+django-elasticsearch-dsl>=7.2,<8.0
+
+django-elasticsearch-dsl-drf>=0.22.5,<1.0
 
 requests>=2.31.0
+
+setuptools>=75.0
