@@ -13,7 +13,7 @@ from .filters import ArticleFilter
 from .models import Article, ArticleView, Clap
 from .pagination import ArticlePagination
 from .permissions import IsOwnerOrReadOnly
-from .renderers import ArticleJSONRenderer, ArticleJSONRenderer
+from .renderers import ArticleJSONRenderer
 from .serializers import ArticleSerializer, ClapSerializer
 
 User = get_user_model()
@@ -66,8 +66,8 @@ class ArticleRetrieveUpdateDestroyView(generics.RetrieveUpdateDestroyAPIView):
         )
 
         return Response(serializer.data)
-    
-    
+
+
 class ClapArticleView(generics.CreateAPIView, generics.DestroyAPIView):
     queryset = Clap.objects.all()
     serializer_class = ClapSerializer

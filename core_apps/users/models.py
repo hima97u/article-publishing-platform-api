@@ -9,8 +9,10 @@ from .managers import CustomUserManager
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    pkid = models.BigAutoField(primary_key=True, editable=False) # pseudo pk
-    id = models.UUIDField(default=uuid.uuid4, editable=False, unique=True) # primary key
+    pkid = models.BigAutoField(primary_key=True, editable=False)  # pseudo pk
+    id = models.UUIDField(
+        default=uuid.uuid4, editable=False, unique=True
+    )  # primary key
     first_name = models.CharField(verbose_name=_("first name"), max_length=50)
     last_name = models.CharField(verbose_name=_("last name"), max_length=50)
     email = models.EmailField(

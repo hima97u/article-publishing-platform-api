@@ -52,7 +52,7 @@ isort-check:
 isort-diff:
 	docker compose -f local.yml exec api isort . --diff --skip venv --skip migrations
 
-isort:
+isort: 
 	docker compose -f local.yml exec api isort . --skip venv --skip migrations
 
 createIndex:

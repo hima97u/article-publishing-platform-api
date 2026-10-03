@@ -37,9 +37,11 @@ class CeleryEmailBackend(BaseEmailBackend):
                 attachments.append(
                     {
                         **attachment,
-                        "content": base64.b64encode(content).decode("ascii")
-                        if is_binary
-                        else content,
+                        "content": (
+                            base64.b64encode(content).decode("ascii")
+                            if is_binary
+                            else content
+                        ),
                         "encoded": is_binary,
                     }
                 )
@@ -49,9 +51,11 @@ class CeleryEmailBackend(BaseEmailBackend):
             attachments.append(
                 {
                     "filename": filename,
-                    "content": base64.b64encode(content).decode("ascii")
-                    if is_binary
-                    else content,
+                    "content": (
+                        base64.b64encode(content).decode("ascii")
+                        if is_binary
+                        else content
+                    ),
                     "encoded": is_binary,
                     "mimetype": mimetype,
                 }

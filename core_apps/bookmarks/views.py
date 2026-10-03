@@ -10,7 +10,6 @@ from .models import Bookmark
 from .serializers import BookmarkSerializer
 
 
-
 class BookmarkCreateView(generics.CreateAPIView):
     queryset = Bookmark.objects.all()
     serializer_class = BookmarkSerializer

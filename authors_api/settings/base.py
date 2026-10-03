@@ -1,6 +1,7 @@
 import os
-from pathlib import Path
 from datetime import timedelta
+from pathlib import Path
+
 import environ
 
 env = environ.Env()
@@ -46,7 +47,16 @@ THIRD_PARTY_APPS = [
     "django_elasticsearch_dsl_drf",
 ]
 
-LOCAL_APPS = ["core_apps.profiles", "core_apps.common", "core_apps.users", "core_apps.articles", "core_apps.ratings", "core_apps.bookmarks", "core_apps.responses", "core_apps.search"]
+LOCAL_APPS = [
+    "core_apps.profiles",
+    "core_apps.common",
+    "core_apps.users",
+    "core_apps.articles",
+    "core_apps.ratings",
+    "core_apps.bookmarks",
+    "core_apps.responses",
+    "core_apps.search",
+]
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
 

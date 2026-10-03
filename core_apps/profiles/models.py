@@ -48,7 +48,7 @@ class Profile(TimeStampedModel):
         blank=False,
         null=False,
     )
-    
+
     profile_photo = models.ImageField(
         verbose_name=_("profile photo"), default="/profile_default.png"
     )

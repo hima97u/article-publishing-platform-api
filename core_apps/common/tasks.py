@@ -27,9 +27,11 @@ def deliver_email(self, message_data):
     for attachment in message_data["attachments"]:
         message.attach(
             attachment["filename"],
-            base64.b64decode(attachment["content"])
-            if attachment.get("encoded", False)
-            else attachment["content"],
+            (
+                base64.b64decode(attachment["content"])
+                if attachment.get("encoded", False)
+                else attachment["content"]
+            ),
             attachment["mimetype"],
         )
     with EmailBackend(fail_silently=False) as connection:

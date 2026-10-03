@@ -35,9 +35,8 @@ class UserSerializer(serializers.ModelSerializer):
         if instance.is_superuser:
             representation["admin"] = True
         return representation
-    
-    
-    
+
+
 class CustomRegisterSerializer(RegisterSerializer):
     username = None
     first_name = serializers.CharField(required=True)

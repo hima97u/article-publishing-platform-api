@@ -21,7 +21,7 @@ class Clap(TimeStampedModel):
 
     def __str__(self):
         return f"{self.user.first_name} clapped {self.article.title}"
-    
+
 
 class Article(TimeStampedModel):
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="articles")
@@ -33,10 +33,10 @@ class Article(TimeStampedModel):
         verbose_name=_("banner image"), default="/profile_default.png"
     )
     tags = TaggableManager()
-    
+
     # a user can clap multiple times for an article and also an article can have multiple claps from different users
     claps = models.ManyToManyField(User, through=Clap, related_name="clapped_articles")
-    
+
     def __str__(self):
         return f"{self.author.first_name}'s article"
 
@@ -46,7 +46,7 @@ class Article(TimeStampedModel):
 
     def view_count(self):
         return self.article_views.count()
-    
+
     def average_rating(self):
         ratings = self.ratings.all()
 
@@ -54,7 +54,7 @@ class Article(TimeStampedModel):
             total_rating = sum(rating.rating for rating in ratings)
             average_rating = total_rating / ratings.count()
             return round(average_rating, 2)
-        return None 
+        return None
 
 
 class ArticleView(TimeStampedModel):

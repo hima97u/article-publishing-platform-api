@@ -19,8 +19,7 @@ class UserCreationForm(admin_forms.UserCreationForm):
         "duplicate_email": "A user with this email already exists.",
     }
 
-
-# checking email already exist in db
+    # checking email already exist in db
     def clean_email(self):
         email = self.cleaned_data["email"]
         try:
