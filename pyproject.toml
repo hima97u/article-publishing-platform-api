@@ -1,0 +1,38 @@
+[tool.black]
+line-length = 88
+target-version = ["py311"]
+include = '\.pyi?$'
+extend-exclude = '''
+/(
+  \.git
+  | \.hg
+  | \.mypy_cache
+  | \.tox
+  | \.venv
+  | venv
+  | Virt-env
+  | env
+  | build
+  | dist
+  | mediafiles
+  | staticfiles
+  | migrations
+)/
+'''
+
+[tool.isort]
+profile = "black"
+line_length = 88
+multi_line_output = 3
+include_trailing_comma = true
+force_grid_wrap = 0
+use_parentheses = true
+skip_glob = ["**/migrations/*.py", "**/venv/**", "**/.venv/**"]
+known_django = ["django"]
+known_first_party = ["authors_api", "core_apps"]
+
+[tool.pytest.ini_options]
+DJANGO_SETTINGS_MODULE = "authors_api.settings.local"
+python_files = ["tests.py", "test_*.py", "*_tests.py"]
+testpaths = ["core_apps", "authors_api"]
+addopts = "-ra"
